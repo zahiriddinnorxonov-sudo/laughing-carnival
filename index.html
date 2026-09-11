@@ -10,470 +10,78 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: "Inter", sans-serif;
-      background: #f3f5f8;
-      background-image: 
-        linear-gradient(rgba(180, 200, 220, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(180, 200, 220, 0.08) 1px, transparent 1px);
-      background-size: 48px 48px;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      margin: 0;
-      color: #1e2b37;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* main card — elegant glassmorphism + depth */
-    .card {
-      max-width: 1100px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 40px;
-      box-shadow: 
-        0 25px 45px -12px rgba(0, 0, 0, 0.15),
-        0 8px 18px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6);
-      padding: 2.8rem 2.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      transition: transform 0.25s ease;
-      animation: floatIn 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes floatIn {
-      0% { opacity: 0; transform: translateY(24px) scale(0.98); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    /* header section — architectural typography */
-    .profile {
-      margin-bottom: 2.8rem;
-      position: relative;
-      animation: fadeUp 0.7s ease-out 0.1s both;
-    }
-
-    .profile::after {
-      content: "";
-      position: absolute;
-      bottom: -18px;
-      left: 0;
-      width: 90px;
-      height: 4px;
-      background: linear-gradient(90deg, #b68b5c 0%, #d4b28c 80%, transparent);
-      border-radius: 4px;
-    }
-
-    .name {
-      font-size: clamp(2.6rem, 10vw, 4.5rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      color: #1a2a36;
-      margin-bottom: 0.3rem;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.02);
-    }
-
-    .field {
-      font-size: 1.3rem;
-      font-weight: 400;
-      letter-spacing: 0.3px;
-      color: #4d6272;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .field i {
-      font-size: 1.4rem;
-      color: #b68b5c;
-      background: rgba(182, 139, 92, 0.1);
-      padding: 8px;
-      border-radius: 50%;
-    }
-
-    .bio-tag {
-      margin-top: 0.8rem;
-      font-weight: 350;
-      color: #3f5464;
-      max-width: 600px;
-      border-left: 3px solid #b68b5c;
-      padding-left: 1.2rem;
-      font-style: italic;
-      animation: fadeUp 0.7s 0.15s both;
-    }
-
-    /* contact grid — clean & interactive */
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 500;
-      margin-bottom: 1.8rem;
-      color: #1e2b37;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      animation: fadeUp 0.7s 0.2s both;
-    }
-
-    .section-title i {
-      color: #b68b5c;
-      font-size: 1.8rem;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .contact-item {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      background: #ffffffd6;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      border-radius: 26px;
-      padding: 1.2rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.06);
-      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-      text-decoration: none;
-      color: inherit;
-      animation: fadeUp 0.6s ease-out both;
-      animation-delay: calc(0.05s * var(--i, 0));
-      border-bottom: 2px solid transparent;
-    }
-
-    .contact-item:hover {
-      transform: translateY(-6px);
-      background: #ffffff;
-      box-shadow: 0 24px 30px -14px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(182, 139, 92, 0.2);
-      border-bottom: 2px solid #b68b5c;
-    }
-
-    /* staggered animation */
-    .contact-item:nth-child(1) { --i: 1; }
-    .contact-item:nth-child(2) { --i: 2; }
-    .contact-item:nth-child(3) { --i: 3; }
-    .contact-item:nth-child(4) { --i: 4; }
-    .contact-item:nth-child(5) { --i: 5; }
-    .contact-item:nth-child(6) { --i: 6; }
-    .contact-item:nth-child(7) { --i: 7; }
-    .contact-item:nth-child(8) { --i: 8; }
-
-    .icon-wrapper {
-      width: 48px;
-      height: 48px;
-      background: #e8eef3;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
-      color: #2b404e;
-    }
-
-    .contact-item:hover .icon-wrapper {
-      background: #b68b5c20;
-      color: #9e6f42;
-    }
-
-    .icon-wrapper i {
-      font-size: 1.7rem;
-    }
-
-    .contact-info {
-      flex: 1;
-    }
-
-    .contact-label {
-      font-size: 0.8rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #5f7687;
-      margin-bottom: 4px;
-    }
-
-    .contact-value {
-      font-weight: 550;
-      font-size: 1.05rem;
-      color: #14212b;
-      word-break: break-word;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .contact-value i.fa-arrow-up-right-from-square {
-      font-size: 0.8rem;
-      opacity: 0.6;
-      transition: 0.2s;
-    }
-
-    .contact-item:hover .contact-value i {
-      opacity: 1;
-      color: #b68b5c;
-    }
-
-    /* phone specific */
-    .phone-link {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* footer / extra note */
-    .footer-note {
-      margin-top: 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      color: #4e6679;
-      font-size: 0.9rem;
-      border-top: 1px dashed #b9ccda;
-      padding-top: 1.8rem;
-      animation: fadeUp 0.7s 0.35s both;
-    }
-
-    .arch-detail {
-      display: flex;
-      gap: 16px;
-    }
-
-    .arch-detail span i {
-      margin-right: 6px;
-      color: #b68b5c;
-    }
-
-    /* animations */
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(15px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* responsive */
-    @media (max-width: 640px) {
-      body {
-        padding: 0.8rem;
-        align-items: flex-start;
-        background-size: 32px 32px;
-      }
-      .card {
-        padding: 1.8rem 1.5rem;
-        border-radius: 32px;
-      }
-      .name {
-        font-size: 2.4rem;
-      }
-      .field {
-        font-size: 1.1rem;
-      }
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      .footer-note {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    /* subtle blueprint vibe */
-    .blueprint-accent {
-      position: relative;
-    }
-    /* custom link reset */
-    a, a:visited {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* copy indicator (cosmetic) */
-    .copy-hint {
-      font-size: 0.75rem;
-      opacity: 0.5;
-    }
-
-    /* additional polish */
-    .inline-icon {
-      margin-right: 4px;
-    }
-
-    .youtube-channel i, .telegram-channel i {
-      color: #b68b5c;
-    }
-
-    /* remove default button styles */
-    button {
-      background: none;
-      border: none;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Inter", sans-serif; background: #f3f5f8; background-image: linear-gradient(rgba(180, 200, 220, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(180, 200, 220, 0.08) 1px, transparent 1px); background-size: 48px 48px; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1.5rem; margin: 0; color: #1e2b37; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    .card { max-width: 1100px; width: 100%; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 40px; box-shadow: 0 25px 45px -12px rgba(0,0,0,0.15), 0 8px 18px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.6); padding: 2.8rem 2.5rem; border: 1px solid rgba(255,255,255,0.4); transition: transform 0.25s ease; animation: floatIn 0.9s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes floatIn { 0% { opacity:0; transform:translateY(24px) scale(0.98); } 100% { opacity:1; transform:translateY(0) scale(1); } }
+    .profile { margin-bottom: 2.8rem; position: relative; animation: fadeUp 0.7s ease-out 0.1s both; }
+    .profile::after { content:""; position:absolute; bottom:-18px; left:0; width:90px; height:4px; background:linear-gradient(90deg,#b68b5c 0%,#d4b28c 80%,transparent); border-radius:4px; }
+    .name { font-size:clamp(2.6rem,10vw,4.5rem); font-weight:600; letter-spacing:-0.02em; line-height:1.1; color:#1a2a36; margin-bottom:0.3rem; text-shadow:0 2px 5px rgba(0,0,0,0.02); }
+    .field { font-size:1.3rem; font-weight:400; letter-spacing:0.3px; color:#4d6272; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .field i { font-size:1.4rem; color:#b68b5c; background:rgba(182,139,92,0.1); padding:8px; border-radius:50%; }
+    .bio-tag { margin-top:0.8rem; font-weight:350; color:#3f5464; max-width:600px; border-left:3px solid #b68b5c; padding-left:1.2rem; font-style:italic; animation:fadeUp 0.7s 0.15s both; }
+    .section-title { font-size:1.5rem; font-weight:500; margin-bottom:1.8rem; color:#1e2b37; display:flex; align-items:center; gap:12px; animation:fadeUp 0.7s 0.2s both; }
+    .section-title i { color:#b68b5c; font-size:1.8rem; }
+    .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; margin-bottom:1.2rem; }
+    .contact-item { background:#ffffffd6; backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,0.7); border-radius:26px; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1rem; box-shadow:0 8px 18px -8px rgba(0,0,0,0.06); transition:all 0.3s cubic-bezier(0.2,0,0,1); text-decoration:none; color:inherit; animation:fadeUp 0.6s ease-out both; animation-delay:calc(0.05s * var(--i,0)); border-bottom:2px solid transparent; }
+    .contact-item:hover { transform:translateY(-6px); background:#fff; box-shadow:0 24px 30px -14px rgba(0,0,0,0.12),0 0 0 1px rgba(182,139,92,0.2); border-bottom:2px solid #b68b5c; }
+    .contact-item:nth-child(1){--i:1}.contact-item:nth-child(2){--i:2}.contact-item:nth-child(3){--i:3}.contact-item:nth-child(4){--i:4}.contact-item:nth-child(5){--i:5}.contact-item:nth-child(6){--i:6}.contact-item:nth-child(7){--i:7}.contact-item:nth-child(8){--i:8}
+    .icon-wrapper { width:48px; height:48px; background:#e8eef3; border-radius:18px; display:flex; align-items:center; justify-content:center; transition:0.2s; color:#2b404e; flex-shrink:0; }
+    .contact-item:hover .icon-wrapper { background:#b68b5c20; color:#9e6f42; }
+    .icon-wrapper i { font-size:1.7rem; }
+    .contact-info { flex:1; }
+    .contact-label { font-size:0.8rem; font-weight:500; text-transform:uppercase; letter-spacing:0.5px; color:#5f7687; margin-bottom:4px; }
+    .contact-value { font-weight:550; font-size:1.05rem; color:#14212b; word-break:break-word; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .contact-value i.fa-arrow-up-right-from-square { font-size:0.8rem; opacity:0.6; transition:0.2s; }
+    .contact-item:hover .contact-value i { opacity:1; color:#b68b5c; }
+    .phone-link { text-decoration:none; color:inherit; }
+    .phone-link + .phone-link { margin-left:8px; }
+    .footer-note { margin-top:2.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; color:#4e6679; font-size:0.9rem; border-top:1px dashed #b9ccda; padding-top:1.8rem; animation:fadeUp 0.7s 0.35s both; }
+    .arch-detail { display:flex; gap:16px; }
+    .arch-detail span i { margin-right:6px; color:#b68b5c; }
+    @keyframes fadeUp { 0%{opacity:0;transform:translateY(15px)} 100%{opacity:1;transform:translateY(0)} }
+    @media (max-width:640px) { body{padding:0.8rem;align-items:flex-start;background-size:32px 32px}.card{padding:1.8rem 1.5rem;border-radius:32px}.name{font-size:2.4rem}.field{font-size:1.1rem}.contact-grid{grid-template-columns:1fr;gap:1rem}.footer-note{flex-direction:column;align-items:flex-start}.phone-link + .phone-link{margin-left:0} }
+    .blueprint-accent { position:relative; }
+    a,a:visited { text-decoration:none; color:inherit; }
+    .copy-hint { font-size:0.75rem; opacity:0.5; }
+    .inline-icon { margin-right:4px; }
+    .youtube-channel i,.telegram-channel i { color:#b68b5c; }
+    button { background:none; border:none; }
   </style>
 </head>
 <body>
 <div class="card">
-  
-  <!-- Profile header -->
   <div class="profile">
     <h1 class="name">Zahiriddin Norxonov</h1>
     <div class="field">
-      <i class="fas fa-compass-drafting"></i> 
+      <i class="fas fa-compass-drafting"></i>
       <span>Architecture & Design</span>
-      <span style="margin-left: auto; font-size: 0.9rem; background: #eef3f7; padding: 4px 14px; border-radius: 40px; font-weight: 400;">
-        <i class="fas fa-map-pin" style="font-size: 0.8rem;"></i> Tashkent · Moscow
-      </span>
+      <span style="margin-left:auto;font-size:0.9rem;background:#eef3f7;padding:4px 14px;border-radius:40px;font-weight:400;"><i class="fas fa-map-pin" style="font-size:0.8rem;"></i> Tashkent · Moscow</span>
     </div>
-    <div class="bio-tag">
-      <i class="fas fa-ruler-combined" style="margin-right: 10px; opacity: 0.8;"></i> 
-      Creating spaces that resonate — architectural vision & digital presence.
-    </div>
+    <div class="bio-tag"><i class="fas fa-ruler-combined" style="margin-right:10px;opacity:0.8;"></i> Creating spaces that resonate — architectural vision & digital presence.</div>
   </div>
-
-  <!-- Connect / Contact grid -->
-  <div class="section-title">
-    <i class="fas fa-share-nodes"></i> 
-    <span>Connect & contact</span>
-    <span style="font-size: 0.9rem; margin-left: auto; font-weight: 350; background: #d9e2e9; padding: 2px 12px; border-radius: 30px;">8 channels</span>
-  </div>
-
+  <div class="section-title"><i class="fas fa-share-nodes"></i><span>Connect & contact</span><span style="font-size:0.9rem;margin-left:auto;font-weight:350;background:#d9e2e9;padding:2px 12px;border-radius:30px;">8 channels</span></div>
   <div class="contact-grid">
-    
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/e1dono?igsh=dzl1M2VpMzBmNmRl&utm_source=qr" target="_blank" rel="noopener noreferrer" class="contact-item">
-      <div class="icon-wrapper"><i class="fab fa-instagram"></i></div>
-      <div class="contact-info">
-        <div class="contact-label">Instagram</div>
-        <div class="contact-value">@e1dono <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-      </div>
-    </a>
-
-    <!-- Telegram personal -->
-    <a href="https://t.me/bea_akasaki" target="_blank" rel="noopener noreferrer" class="contact-item">
-      <div class="icon-wrapper"><i class="fab fa-telegram-plane"></i></div>
-      <div class="contact-info">
-        <div class="contact-label">Telegram</div>
-        <div class="contact-value">@bea_akasaki <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-      </div>
-    </a>
-
-    <!-- Telegram Channel -->
-    <a href="https://t.me/+VVhCyZaRX6gyMTVi" target="_blank" rel="noopener noreferrer" class="contact-item telegram-channel">
-      <div class="icon-wrapper"><i class="fab fa-telegram"></i></div>
-      <div class="contact-info">
-        <div class="contact-label">Telegram Channel</div>
-        <div class="contact-value">t.me/architecture <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-      </div>
-    </a>
-
-    <!-- YouTube -->
-    <a href="https://youtube.com/@Japantravel4K-wz2ny" target="_blank" rel="noopener noreferrer" class="contact-item youtube-channel">
-      <div class="icon-wrapper"><i class="fab fa-youtube"></i></div>
-      <div class="contact-info">
-        <div class="contact-label">YouTube</div>
-        <div class="contact-value">@Japantravel4K-wz2ny <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-      </div>
-    </a>
-
-    <!-- Google / Gmail -->
-    <a href="mailto:zahiriddinnorxonov@gmail.com" class="contact-item">
-      <div class="icon-wrapper"><i class="fas fa-envelope"></i></div>
-      <div class="contact-info">
-        <div class="contact-label">Google · Gmail</div>
-        <div class="contact-value">zahiriddinnorxonov@gmail.com <i class="fa-regular fa-copy" style="opacity: 0.5;"></i></div>
-      </div>
-    </a>
-
-    <!-- Yandex mail -->
-    <a href="mailto:zahiriddinnorxonov@yandex.com" class="contact-item">
-      <div class="icon-wrapper"><i class="fas fa-at"></i></div>
-      <div class="contact-info">
-        <div class="contact-label">Yandex Mail</div>
-        <div class="contact-value">zahiriddinnorxonov@yandex.com</div>
-      </div>
-    </a>
-
-    <!-- Phone (RU) -->
-    <div class="contact-item">
-      <div class="icon-wrapper"><i class="fas fa-phone-alt"></i></div>
-      <div class="contact-info">
-        <div class="contact-label">Phone · RU</div>
-        <div class="contact-value">
-          <a href="tel:+79254238690" class="phone-link">+7 925 423 86 90</a>
-          <i class="fa-regular fa-message" style="margin-left: 6px; opacity: 0.6;"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Google Account (duplicate info but as separate card for completeness) -->
-    <div class="contact-item">
-      <div class="icon-wrapper"><i class="fab fa-google"></i></div>
-      <div class="contact-info">
-        <div class="contact-label">Google Account</div>
-        <div class="contact-value">zahiriddinnorxonov</div>
-      </div>
-    </div>
-
+    <a href="https://www.instagram.com/e1dono?igsh=dzl1M2VpMzBmNmRl&utm_source=qr" target="_blank" rel="noopener noreferrer" class="contact-item"><div class="icon-wrapper"><i class="fab fa-instagram"></i></div><div class="contact-info"><div class="contact-label">Instagram</div><div class="contact-value">@e1dono <i class="fa-solid fa-arrow-up-right-from-square"></i></div></div></a>
+    <a href="https://t.me/bea_akasaki" target="_blank" rel="noopener noreferrer" class="contact-item"><div class="icon-wrapper"><i class="fab fa-telegram-plane"></i></div><div class="contact-info"><div class="contact-label">Telegram</div><div class="contact-value">@bea_akasaki <i class="fa-solid fa-arrow-up-right-from-square"></i></div></div></a>
+    <a href="https://t.me/+VVhCyZaRX6gyMTVi" target="_blank" rel="noopener noreferrer" class="contact-item telegram-channel"><div class="icon-wrapper"><i class="fab fa-telegram"></i></div><div class="contact-info"><div class="contact-label">Telegram Channel</div><div class="contact-value">t.me/architecture <i class="fa-solid fa-arrow-up-right-from-square"></i></div></div></a>
+    <a href="https://youtube.com/@Japantravel4K-wz2ny" target="_blank" rel="noopener noreferrer" class="contact-item youtube-channel"><div class="icon-wrapper"><i class="fab fa-youtube"></i></div><div class="contact-info"><div class="contact-label">YouTube</div><div class="contact-value">@Japantravel4K-wz2ny <i class="fa-solid fa-arrow-up-right-from-square"></i></div></div></a>
+    <a href="mailto:zahiriddinnorxonov@gmail.com" class="contact-item"><div class="icon-wrapper"><i class="fas fa-envelope"></i></div><div class="contact-info"><div class="contact-label">Google · Gmail</div><div class="contact-value">zahiriddinnorxonov@gmail.com <i class="fa-regular fa-copy" style="opacity:0.5;"></i></div></div></a>
+    <a href="mailto:zahiriddinnorxonov@yandex.com" class="contact-item"><div class="icon-wrapper"><i class="fas fa-at"></i></div><div class="contact-info"><div class="contact-label">Yandex Mail</div><div class="contact-value">zahiriddinnorxonov@yandex.com</div></div></a>
+    <div class="contact-item"><div class="icon-wrapper"><i class="fas fa-phone-alt"></i></div><div class="contact-info"><div class="contact-label">Phone · RU</div><div class="contact-value"><a href="tel:+79254238690" class="phone-link">+7 925 423 86 90</a><i class="fa-regular fa-message" style="margin-left:6px;opacity:0.6;"></i></div></div></div>
+    <div class="contact-item"><div class="icon-wrapper"><i class="fas fa-phone-alt"></i></div><div class="contact-info"><div class="contact-label">Phone · UZ</div><div class="contact-value"><a href="tel:+998930352216" class="phone-link">+998 93 035 22 16</a><i class="fa-regular fa-message" style="margin-left:6px;opacity:0.6;"></i></div></div></div>
   </div>
-
-  <!-- Footer / architectural detail + extra links (Instagram alternative and Yandex context) -->
-  <div class="footer-note">
-    <div class="arch-detail">
-      <span><i class="fas fa-draw-polygon"></i> architecture</span>
-      <span><i class="fas fa-cube"></i> 3D · visual</span>
-      <span><i class="fas fa-pencil"></i> sketch</span>
-    </div>
-    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-      <span style="display: flex; align-items: center;"><i class="fab fa-instagram" style="margin-right: 6px;"></i> e1dono</span>
-      <span style="display: flex; align-items: center;"><i class="fab fa-yandex" style="margin-right: 6px;"></i> yandex connected</span>
-      <span style="display: flex; align-items: center;"><i class="fas fa-globe"></i> EN · RU · UZ</span>
-    </div>
-  </div>
-  
-  <!-- subtle decorative line — blueprint style -->
-  <div style="margin-top: 1rem; display: flex; justify-content: flex-end; opacity: 0.5; gap: 5px;">
-    <span style="height: 1px; width: 40px; background: #b68b5c;"></span>
-    <span style="height: 1px; width: 8px; background: #b68b5c;"></span>
-    <span style="height: 1px; width: 20px; background: #b68b5c;"></span>
-  </div>
+  <div class="footer-note"><div class="arch-detail"><span><i class="fas fa-draw-polygon"></i> architecture</span><span><i class="fas fa-cube"></i> 3D · visual</span><span><i class="fas fa-pencil"></i> sketch</span></div><div style="display:flex;gap:20px;flex-wrap:wrap;"><span style="display:flex;align-items:center;"><i class="fab fa-instagram" style="margin-right:6px;"></i> e1dono</span><span style="display:flex;align-items:center;"><i class="fab fa-yandex" style="margin-right:6px;"></i> yandex connected</span><span style="display:flex;align-items:center;"><i class="fas fa-globe"></i> EN · RU · UZ</span></div></div>
+  <div style="margin-top:1rem;display:flex;justify-content:flex-end;opacity:0.5;gap:5px;"><span style="height:1px;width:40px;background:#b68b5c"></span><span style="height:1px;width:8px;background:#b68b5c"></span><span style="height:1px;width:20px;background:#b68b5c"></span></div>
 </div>
-
-<!-- tiny script for extra polish (no needed, but adds copy simulation if wanted) -->
 <script>
-  (function() {
-    // just a smooth presence — add a little extra animation class after load
+  (function(){
     document.body.classList.add('loaded');
-    
-    // optional: log for clarity, no user action needed
     console.log('✨ Zahiriddin Norxonov · Architecture portfolio — all links ready');
-    
-    // make phone copy friendly (just visual)
-    const phoneElement = document.querySelector('.phone-link');
-    if(phoneElement) {
-      phoneElement.addEventListener('click', function(e) {
-        // just works
-      });
-    }
+    const phoneElement=document.querySelector('.phone-link');
+    if(phoneElement){phoneElement.addEventListener('click',function(e){});}
   })();
 </script>
-
 <!-- ensure all external links open safely -->
 </body>
 </html>
